@@ -1,12 +1,13 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import {NavLink} from 'react-router-dom';
+
 
 const Nav = () => (
-  <nav class="main-nav">
+  <nav className="main-nav">
     <ul>
-      <li><a href='#'>Cats</a></li>
-      <li><a href='#'>Dogs</a></li>
-      <li><a href='#'>Computers</a></li>
+      <li><NavLink to="/dogs">Dogs</NavLink></li>
+      <li><NavLink to="/horses">Horses</NavLink></li>
+      <li><NavLink to="/forests">Forests</NavLink></li>
     </ul>
   </nav>
 );
