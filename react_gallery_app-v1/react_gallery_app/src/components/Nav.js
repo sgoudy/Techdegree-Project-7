@@ -1,15 +1,22 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Route} from 'react-router-dom';
 
+const Nav = (props) => {
 
-const Nav = () => (
+  const getData=(e)=>{
+    const value = e.target.textContent;
+    props.onClick(value);
+  }
+
+  return(
   <nav className="main-nav">
     <ul>
-      <li><NavLink to="/dogs">Dogs</NavLink></li>
-      <li><NavLink to="/horses">Horses</NavLink></li>
-      <li><NavLink to="/forests">Forests</NavLink></li>
+      <li><NavLink to="/dogs" onClick={getData}>Dogs</NavLink></li>
+      <li><NavLink to="/horses" onClick={getData}>Horses</NavLink></li>
+      <li><NavLink to="/forests" onClick={getData}>Forests</NavLink></li>
     </ul>
   </nav>
-);
+  );
+}
 
 export default Nav;

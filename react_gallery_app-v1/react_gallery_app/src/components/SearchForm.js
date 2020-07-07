@@ -19,7 +19,7 @@ class SearchForm extends Component {
     render () {
         return (
             <form className="search-form" 
-            onSubmit={ this.handleSubmit }>
+            onSubmit={this.handleSubmit}>
                 <input type="search" 
                 name="search" 
                 placeholder="Search" 
