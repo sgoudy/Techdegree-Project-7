@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
+import PhotoContainer from './PhotoContainer';
+import {Route} from 'react-router-dom';
+import Nav from './Nav';
+import NotFound from './NotFound';
+
+
 
 class SearchForm extends Component {
 
     state= {
-        searchInput: ''
-    }
-
-    onSearchChange = (e) => (
-        this.setState({searchInput: e.target.value})
-    )
+        query: '',
+        loading: false
+        }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onSearch(this.query.value);
+        this.setHistory();
+        this.setState({ 
+            query: this.query.value,
+            loading: true
+        });
         e.currentTarget.reset();
-      }
+    }; 
 
-    render () {
-        return (
-            <form className="search-form" 
-            onSubmit={this.handleSubmit}>
+    setHistory =() =>{
+        let topic = this.query.value;
+        let path = `/search/${topic}`;
+        this.props.history.push(path);
+    }
+
+    render () {     
+        return (  
+            <div>
+            <form className="search-form" onSubmit={this.setHistory}>
                 <input type="search" 
                 name="search" 
                 placeholder="Search" 
-                onChange={this.onSearchChange}
                 ref={input => this.query = input}
                 />
                 <button type="submit" className="search-button">
@@ -33,6 +45,18 @@ class SearchForm extends Component {
                 </svg>
                 </button>
             </form>
+            <Nav  />
+            {
+                (this.state.loading)  
+                ? <PhotoContainer data={this.state.query} loading={this.state.loading}/>
+                : null
+            }
+            <Route path="/water" render={()=> <PhotoContainer data="water" loading={this.state.loading}/>}/>
+            <Route path="/horses" render={()=> <PhotoContainer data="horses" loading={this.state.loading}/>} />
+            <Route path="/forests" render={()=> <PhotoContainer data="forests" loading={this.state.loading}/>} />
+            
+            
+            </div>
         );
     }
 }
