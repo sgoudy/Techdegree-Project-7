@@ -1,39 +1,46 @@
 import React, { Component } from 'react';
-import PhotoContainer from './PhotoContainer';
-import {Route} from 'react-router-dom';
-import Nav from './Nav';
-import NotFound from './NotFound';
+import {withRouter} from 'react-router';
+// import {Route} from 'react-router-dom';
+// import PhotoContainer from './PhotoContainer'
+
 
 
 
 class SearchForm extends Component {
-
+    
     state= {
         query: '',
-        loading: false
+        loading: true
         }
+
+    onSearchChange = (e) => (
+        this.setState({
+            query: e.target.value,
+            loading: false
+        })
+    )
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setHistory();
-        this.setState({ 
-            query: this.query.value,
-            loading: true
-        });
+        this.setHistory(this.props);
+        this.props.onSearch(this.query.value);
         e.currentTarget.reset();
-    }; 
+      }
 
-    setHistory =() =>{
-        let topic = this.query.value;
-        let path = `/search/${topic}`;
-        this.props.history.push(path);
+      setHistory =(props) =>{ 
+        let topic= this.query.value;
+        let path = `search/${topic}`;
+        props.history.push(path);   
+        console.log('setHistory!')
     }
 
-    render () {     
+    render () {    
         return (  
-            <div>
-            <form className="search-form" onSubmit={this.setHistory}>
-                <input type="search" 
+            
+            <form className="search-form" onSubmit={this.handleSubmit}>
+                <input 
+                type="search" 
+                onChange={this.onSearchChange}
                 name="search" 
                 placeholder="Search" 
                 ref={input => this.query = input}
@@ -45,20 +52,10 @@ class SearchForm extends Component {
                 </svg>
                 </button>
             </form>
-            <Nav  />
-            {
-                (this.state.loading)  
-                ? <PhotoContainer data={this.state.query} loading={this.state.loading}/>
-                : null
-            }
-            <Route path="/water" render={()=> <PhotoContainer data="water" loading={this.state.loading}/>}/>
-            <Route path="/horses" render={()=> <PhotoContainer data="horses" loading={this.state.loading}/>} />
-            <Route path="/forests" render={()=> <PhotoContainer data="forests" loading={this.state.loading}/>} />
-            
-            
-            </div>
+           
         );
     }
 }
 
-export default SearchForm;
+
+export default withRouter(SearchForm);
