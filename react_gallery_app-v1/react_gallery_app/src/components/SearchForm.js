@@ -31,7 +31,6 @@ class SearchForm extends Component {
         let topic= this.query.value;
         let path = `search/${topic}`;
         props.history.push(path);   
-        console.log('setHistory!')
     }
 
     render () {    

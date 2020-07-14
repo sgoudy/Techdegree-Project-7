@@ -5,10 +5,10 @@ import NotFound from './NotFound';
 
 class PhotoContainer extends Component {
 
-    state={
-        query: this.props.query,
-        gifs: this.props.gifs
-    }
+    // state={
+    //     query: this.props.query,
+    //     gifs: this.props.gifs
+    // }
 
     render(){
 

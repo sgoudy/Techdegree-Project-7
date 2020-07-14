@@ -22,11 +22,10 @@ import apiKey from './config';
     }
 
     componentDidMount(){
-        this.performSearch();
-        
+        this.performSearch();    
     }
 
-    performSearch=(query='dogs')=>{
+    performSearch=(query='dingo')=>{
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
           .then(response => {
             this.setState({
@@ -41,7 +40,7 @@ import apiKey from './config';
           });
     }
 
-    componentDidUpdate() {
+    componentDidUpdate=()=>{
       if (this.props.location.pathname !== this.state.url) {
         this.performSearch(this.props.location.pathname);
       } else if (this.state.url === this.props.url){
@@ -49,15 +48,21 @@ import apiKey from './config';
       }
     }
 
+    renderURL =()=>{
+      let topic = this.props.match.params.topic;
+      console.log('Heyoooo')
+    }
+    
+
   render(){
 
     return (
       <div className="container">
       <Switch>
-      
+
           <Route exact path="/">
             <SearchForm onSearch={this.performSearch}/>
-            <Nav onClick={this.performSearch}/>
+            <Nav />
             {
               (this.state.loading)
               ? <p>Loading...</p>
@@ -74,6 +79,21 @@ import apiKey from './config';
               : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
             } 
           </Route>
+
+          {/* <Route path="/search/:">
+            {
+              (this.props.location.pathname === '/search/:')
+              ? this.renderURL()
+              : null
+            }
+            <SearchForm onSearch={this.performSearch}/>
+            <Nav onClick={this.performSearch}/>
+            {
+              (this.state.loading)
+              ? <p>Loading...</p>
+              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
+            } 
+          </Route> */}
 
         </Switch>
       </div>
