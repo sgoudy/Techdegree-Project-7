@@ -5,8 +5,6 @@ import {withRouter} from 'react-router';
 
 const Nav = ({match}) => {
 
-
-
   return(
 <div>
    <div>

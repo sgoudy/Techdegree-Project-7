@@ -5,8 +5,6 @@ import NotFound from './NotFound';
 
 class PhotoContainer extends Component {
 
-   
-
     render(){
 
       const results = this.props.gifs;
@@ -28,14 +26,13 @@ class PhotoContainer extends Component {
               <NotFound />
           )
         } 
-    
 
     return (
         <div className="photo-container">
-        <h2>{this.props.query} Gifs</h2>
-            <ul>
-                {gifs } 
-            </ul>
+            <h2>{this.props.query} Gifs</h2>
+                <ul>
+                    {gifs } 
+                </ul>
         </div>
     );
     }
