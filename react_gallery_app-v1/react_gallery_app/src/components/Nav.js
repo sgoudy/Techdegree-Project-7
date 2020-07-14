@@ -1,8 +1,7 @@
 import React from 'react';
 import {NavLink, Route} from 'react-router-dom';
 import {withRouter} from 'react-router';
-// import PhotoContainer from './PhotoContainer';
-// import App from './App';
+
 
 const Nav = ({match}) => {
 
@@ -14,14 +13,14 @@ const Nav = ({match}) => {
       <nav className="main-nav">
         <ul>
           <li><NavLink to="/water" >Water</NavLink></li>
-          <li><NavLink to="/horses" >Horses</NavLink></li>
-          <li><NavLink to="/forests">Forests</NavLink></li>
+          <li><NavLink to="/horse" >Horse</NavLink></li>
+          <li><NavLink to="/forest">Forest</NavLink></li>
         </ul>
       </nav>
     </div>
     <Route path={`${match.path}/water`} />
-    <Route path={`${match.path}/horses`} />
-    <Route path={`${match.path}/forests`} />
+    <Route path={`${match.path}/horse`} />
+    <Route path={`${match.path}/forest`} />
 </div>
   );
 }

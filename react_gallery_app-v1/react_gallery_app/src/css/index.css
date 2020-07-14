@@ -1,7 +1,8 @@
 body {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  color: #3f4850;
+  font-family: 'Courier New', sans-serif;
+  color: #30353a;
+  background-color: lightslategray;
 }
 
 h2 {
@@ -27,7 +28,7 @@ a {
 
 .search-form button {
   outline: none;
-  background-color: #438bbd;
+  background-color: #293d4b;
   border: none;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
@@ -52,7 +53,7 @@ input {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #293d4b;
   border-radius: 3px;
   padding: 5px;
   color: #fff;

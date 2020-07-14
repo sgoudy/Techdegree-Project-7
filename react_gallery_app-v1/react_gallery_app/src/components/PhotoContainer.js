@@ -32,7 +32,7 @@ class PhotoContainer extends Component {
 
     return (
         <div className="photo-container">
-        <h2>Results!</h2>
+        <h2>{this.props.query} Gifs</h2>
             <ul>
                 {gifs } 
             </ul>

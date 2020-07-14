@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import { withRouter } from "react-router";
 
 //App Components
 import SearchForm from './SearchForm';
 import PhotoContainer from './PhotoContainer';
 import Nav from './Nav';
+import DoesNotExist from './DoesNotExist';
 
 //Search features
 import axios from 'axios';
 import apiKey from './config';
+
+
 
 
  class App extends Component {
@@ -17,7 +20,8 @@ import apiKey from './config';
     state={
       query: '',
       gifs: [],
-      loading: true
+      loading: true,
+      url: '/'
     }
 
     componentDidMount(){
@@ -30,7 +34,8 @@ import apiKey from './config';
             this.setState({
                 query: query,
                 gifs: response.data.photos.photo,
-                loading: false
+                loading: false,
+                url: this.props.location.pathname
             });
           })
           .catch(error => {
@@ -38,10 +43,7 @@ import apiKey from './config';
           });
     }
 
-    
-
     render(){
-      console.log(this.state.loading)
     
     return (
       <div className="container">
@@ -53,30 +55,31 @@ import apiKey from './config';
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} />
+              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
             } 
           </Route>
         
-          <Route path="/search/:query" >
+          <Route exact path="/search/:query" >
             <SearchForm onSearch={this.performSearch} query={this.state.query}/>
             <Nav />
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} />
+              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
             } 
           </Route>
           
-          <Route path="/:query" >
+          <Route exact path="/:query" >
             <SearchForm onSearch={this.performSearch} query={this.state.query}/>
             <Nav onClick={this.performSearch}/>
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} />
+              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
             } 
           </Route>
           
+          <Route component={DoesNotExist}/>
          
 
         </Switch>

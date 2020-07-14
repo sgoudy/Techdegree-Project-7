@@ -8,23 +8,19 @@ class SearchForm extends Component {
         query: 'dingo'
         }
 
-    onSearchChange = (e) => (
-        this.setState({
-            url: this.props.location.pathname
-        })
-    )
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.setHistory();
         this.setState({
-            query: e.target.value
+            query: e.target.value,
+            url: this.props.location.pathname
         })
         this.props.onSearch(this.query.value);
         e.currentTarget.reset();
       }
 
-      setHistory =() =>{ 
+    setHistory =() =>{ 
         let topic= this.query.value;
         let path = `/search/${topic}`;
         this.props.history.push(path);   
@@ -44,7 +40,6 @@ class SearchForm extends Component {
             <form className="search-form" onSubmit={this.handleSubmit}>
                 <input 
                 type="search" 
-                onChange={this.onSearchChange}
                 name="search" 
                 placeholder="Search" 
                 ref={input => this.query = input}
