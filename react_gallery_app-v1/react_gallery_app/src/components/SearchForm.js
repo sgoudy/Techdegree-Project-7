@@ -1,38 +1,43 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router';
-// import {Route} from 'react-router-dom';
-// import PhotoContainer from './PhotoContainer'
-
-
-
 
 class SearchForm extends Component {
     
     state= {
-        query: '',
-        loading: true
+        url: '/',
+        query: 'dingo'
         }
 
     onSearchChange = (e) => (
         this.setState({
-            query: e.target.value,
-            loading: false
+            url: this.props.location.pathname
         })
     )
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setHistory(this.props);
+        this.setHistory();
+        this.setState({
+            query: e.target.value
+        })
         this.props.onSearch(this.query.value);
         e.currentTarget.reset();
       }
 
-      setHistory =(props) =>{ 
+      setHistory =() =>{ 
         let topic= this.query.value;
-        let path = `search/${topic}`;
-        props.history.push(path);   
+        let path = `/search/${topic}`;
+        this.props.history.push(path);   
     }
 
+    componentDidUpdate=()=>{
+        const urlParam= this.props.match.params.query;
+        const propQuery= this.props.query;
+        if(urlParam !== propQuery){
+            this.props.onSearch(urlParam)    
+        }        
+    }
+         
     render () {    
         return (  
             

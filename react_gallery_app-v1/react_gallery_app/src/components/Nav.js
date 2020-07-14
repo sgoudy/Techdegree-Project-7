@@ -1,12 +1,16 @@
 import React from 'react';
 import {NavLink, Route} from 'react-router-dom';
 import {withRouter} from 'react-router';
+// import PhotoContainer from './PhotoContainer';
+// import App from './App';
 
-const Nav = () => {
+const Nav = ({match}) => {
+
+
 
   return(
-
-    <div>
+<div>
+   <div>
       <nav className="main-nav">
         <ul>
           <li><NavLink to="/water" >Water</NavLink></li>
@@ -15,6 +19,10 @@ const Nav = () => {
         </ul>
       </nav>
     </div>
+    <Route path={`${match.path}/water`} />
+    <Route path={`${match.path}/horses`} />
+    <Route path={`${match.path}/forests`} />
+</div>
   );
 }
 

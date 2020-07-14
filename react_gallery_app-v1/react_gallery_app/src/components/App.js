@@ -17,8 +17,7 @@ import apiKey from './config';
     state={
       query: '',
       gifs: [],
-      loading: true,
-      url: '/'
+      loading: true
     }
 
     componentDidMount(){
@@ -31,8 +30,7 @@ import apiKey from './config';
             this.setState({
                 query: query,
                 gifs: response.data.photos.photo,
-                loading: false,
-                url: this.props.location.pathname        
+                loading: false
             });
           })
           .catch(error => {
@@ -40,60 +38,46 @@ import apiKey from './config';
           });
     }
 
-    componentDidUpdate=()=>{
-      if (this.props.location.pathname !== this.state.url) {
-        this.performSearch(this.props.location.pathname);
-      } else if (this.state.url === this.props.url){
-        return;
-      }
-    }
-
-    renderURL =()=>{
-      let topic = this.props.match.params.topic;
-      console.log('Heyoooo')
-    }
     
 
-  render(){
-
+    render(){
+      console.log(this.state.loading)
+    
     return (
       <div className="container">
       <Switch>
 
           <Route exact path="/">
-            <SearchForm onSearch={this.performSearch}/>
+            <SearchForm onSearch={this.performSearch} query={this.state.query} />
             <Nav />
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
+              : <PhotoContainer gifs={this.state.gifs} />
             } 
           </Route>
         
-          <Route path="/">
-            <SearchForm onSearch={this.performSearch}/>
-            <Nav onClick={this.performSearch}/>
+          <Route path="/search/:query" >
+            <SearchForm onSearch={this.performSearch} query={this.state.query}/>
+            <Nav />
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
+              : <PhotoContainer gifs={this.state.gifs} />
             } 
           </Route>
-
-          {/* <Route path="/search/:">
-            {
-              (this.props.location.pathname === '/search/:')
-              ? this.renderURL()
-              : null
-            }
-            <SearchForm onSearch={this.performSearch}/>
+          
+          <Route path="/:query" >
+            <SearchForm onSearch={this.performSearch} query={this.state.query}/>
             <Nav onClick={this.performSearch}/>
             {
               (this.state.loading)
               ? <p>Loading...</p>
-              : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
+              : <PhotoContainer gifs={this.state.gifs} />
             } 
-          </Route> */}
+          </Route>
+          
+         
 
         </Switch>
       </div>

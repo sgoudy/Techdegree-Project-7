@@ -5,15 +5,13 @@ import NotFound from './NotFound';
 
 class PhotoContainer extends Component {
 
-    // state={
-    //     query: this.props.query,
-    //     gifs: this.props.gifs
-    // }
+   
 
     render(){
 
       const results = this.props.gifs;
       let gifs;
+
       if (results.length > 0){
                   gifs = results.map(gif => 
                       <Photo 
@@ -25,14 +23,14 @@ class PhotoContainer extends Component {
                       />
                       );
               }
-      else {
+      else if(results.length === 0){
           return (
               <NotFound />
           )
-      }
+        } 
+    
 
     return (
-
         <div className="photo-container">
         <h2>Results!</h2>
             <ul>
