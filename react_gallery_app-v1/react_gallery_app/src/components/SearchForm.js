@@ -3,39 +3,41 @@ import {withRouter} from 'react-router';
 
 class SearchForm extends Component {
     
-    state= {
-        url: '/',
-        query: 'dingo'
-        }
-
-
+    /**
+     *  @param {event} e Event handler.
+     */
     handleSubmit = (e) => {
         e.preventDefault();
         this.setHistory();
-        this.setState({
-            query: e.target.value,
-            url: this.props.location.pathname
-        })
         this.props.onSearch(this.query.value);
+        this.props.loading();
         e.currentTarget.reset();
       }
 
+    /**
+     *  @param {string} query Search query in App Component,
+     *  set path and push history.
+     */
     setHistory =() =>{ 
         let topic= this.query.value;
         let path = `/search/${topic}`;
         this.props.history.push(path);   
     }
 
+    /**
+     *  @param {string} query Compare URL param to Search
+     *  query and if not equivalent, perform new search based
+     *  on URL param. 
+     */
     componentDidUpdate=()=>{
         const urlParam= this.props.match.params.query;
         const propQuery= this.props.query;
         if(urlParam !== propQuery){
             this.props.onSearch(urlParam)    
-        }        
+        }      
     }
          
     render () {    
-        
     return (  
         <form className="search-form" onSubmit={this.handleSubmit}>
             <input 

@@ -6,10 +6,8 @@ import NotFound from './NotFound';
 class PhotoContainer extends Component {
 
     render(){
-
       const results = this.props.gifs;
       let gifs;
-
       if (results.length > 0){
                   gifs = results.map(gif => 
                       <Photo 

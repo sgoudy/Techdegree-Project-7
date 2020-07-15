@@ -12,9 +12,6 @@ import DoesNotExist from './DoesNotExist';
 import axios from 'axios';
 import apiKey from './config';
 
-
-
-
  class App extends Component {
 
     state={
@@ -28,6 +25,9 @@ import apiKey from './config';
         this.performSearch();    
     }
 
+    /**
+     *  @param {string} query Search topic.
+     */
     performSearch=(query='dingo')=>{
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
           .then(response => {
@@ -43,14 +43,19 @@ import apiKey from './config';
           });
     }
 
+    setLoading=()=>{
+      this.setState({
+        loading: true
+      })
+    }
+
     render(){
-    
     return (
       <div className="container">
       <Switch>
 
           <Route exact path="/">
-            <SearchForm onSearch={this.performSearch} query={this.state.query} />
+            <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.setLoading}/>
             <Nav />
             {
               (this.state.loading)
@@ -60,7 +65,7 @@ import apiKey from './config';
           </Route>
         
           <Route exact path="/search/:query" >
-            <SearchForm onSearch={this.performSearch} query={this.state.query}/>
+            <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.setLoading}/>
             <Nav />
             {
               (this.state.loading)
@@ -70,7 +75,7 @@ import apiKey from './config';
           </Route>
           
           <Route exact path="/:query" >
-            <SearchForm onSearch={this.performSearch} query={this.state.query}/>
+            <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.setLoading}/>
             <Nav onClick={this.performSearch}/>
             {
               (this.state.loading)
