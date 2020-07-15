@@ -1,12 +1,11 @@
 import React from 'react';
-import {NavLink, Route} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {withRouter} from 'react-router';
 
 
-const Nav = ({match}) => {
+const Nav = () => {
 
     return(
-    <div>
       <div>
           <nav className="main-nav">
             <ul>
@@ -15,11 +14,7 @@ const Nav = ({match}) => {
               <li><NavLink to="/forest">Forest</NavLink></li>
             </ul>
           </nav>
-        </div>
-        <Route path={`${match.path}/water`} />
-        <Route path={`${match.path}/horse`} />
-        <Route path={`${match.path}/forest`} />
-    </div>
+        </div>   
     );
 }
 
