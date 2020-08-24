@@ -34,7 +34,7 @@ class SearchForm extends Component {
         const propQuery= this.props.query;
         if(urlParam !== propQuery){
             this.props.onSearch(urlParam)    
-        }      
+        } 
     }
          
     render () {    

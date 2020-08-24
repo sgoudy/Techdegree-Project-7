@@ -9,8 +9,8 @@ const Nav = () => {
       <div>
           <nav className="main-nav">
             <ul>
-              <li><NavLink to="/water" >Water</NavLink></li>
-              <li><NavLink to="/horse" >Horse</NavLink></li>
+              <li><NavLink to="/water" query="water">Water</NavLink></li>
+              <li><NavLink to="/horse" query="horses">Horse</NavLink></li>
               <li><NavLink to="/forest">Forest</NavLink></li>
             </ul>
           </nav>

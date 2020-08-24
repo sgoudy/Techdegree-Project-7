@@ -41,6 +41,7 @@ import apiKey from './config';
           .catch(error => {
             console.log('Error fetching and parsing results', error);
           });
+          
     }
 
     setLoading=()=>{
@@ -76,17 +77,16 @@ import apiKey from './config';
           
           <Route exact path="/:query" >
             <SearchForm onSearch={this.performSearch} query={this.state.query} loading={this.setLoading}/>
-            <Nav onClick={this.performSearch}/>
+            <Nav />
             {
               (this.state.loading)
               ? <p>Loading...</p>
               : <PhotoContainer gifs={this.state.gifs} query={this.state.query}/>
             } 
           </Route>
-          
+ 
           <Route component={DoesNotExist}/>
          
-
         </Switch>
       </div>
     )
