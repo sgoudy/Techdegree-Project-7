@@ -1,6 +1,8 @@
 # Techdegree-Project-7
 React Gallery App
 
+![homescreen](public/image1.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In order to use this App, first download all files and then complete the following:
